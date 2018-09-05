@@ -1,2 +1,3 @@
-# smol-dhcpd
-Smol DHPC implementation
+# SMOL DHCPD
+
+Smol DHPC Daemon implementation

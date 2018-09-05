@@ -1,0 +1,161 @@
+/**
+ * DHCP Options
+ * 
+ * See https://tools.ietf.org/html/rfc2132#section-2
+ * or
+ * https://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.xhtml#options
+ * 
+ * FORMAT: DHCP_OPTION( TAG_NUMBER, NAME, NAME_STRING, LENGTH )
+ * 
+ * If length is -1, the length is not a fixed size
+ */
+// Network Mask for the client
+DHCP_OPTION(    1,		SUBNET_MASK,										"Subnet Mask Value",													4	)
+// Offset of the client subnet in seconds
+DHCP_OPTION(    2,		TIME_OFFSET,										"Time Offset in Seconds from UTC (note: deprecated by 100 and 101)",	4	)
+// List of Routers IP Addresses listed in order of preference
+DHCP_OPTION(    3,		ROUTER,												"N/4 Router addresses",													-1	)
+// NTP Servers available to the client
+DHCP_OPTION(    4,		TIME_SERVER,										"N/4 Timeserver addresses",												-1	)
+// Local Name Servers
+DHCP_OPTION(    5,		NAME_SERVER,										"N/4 IEN-116 Server addresses",											-1	)
+// Available DNS Servers
+DHCP_OPTION(    6,		DOMAIN_SERVER,										"N/4 DNS Server addresses",												-1	)
+// List of MIT-LCS UDP log servers available to the client in order of preference
+DHCP_OPTION(    7,		LOG_SERVER,											"N/4 Logging Server addresses",											-1	)
+// List of RFC 865 Cookie (Quote of the day) servers available to the client
+DHCP_OPTION(    8,		QUOTES_SERVER,										"N/4 Quotes Server addresses",											-1	)
+// List of Line Printer Daemon servers available to the client listed in order of preference
+DHCP_OPTION(    9,		LPR_SERVER,											"N/4 Printer Server addresses",											-1	)
+// List of Resource Location servers listed in order of preference
+DHCP_OPTION(    11,	    RLP_SERVER,											"N/4 RLP Server addresses",												-1	)
+// Host name of the client (local host name)
+DHCP_OPTION(    12,	    HOST_NAME,											"Hostname string",														-1	)
+// Default boot image of the client (BOOTP)
+DHCP_OPTION(    13,	    BOOT_FILE_SIZE,										"Size of boot file in 512 byte chunks",									2	)
+// Path name to the clients core image which should be dumped on crash
+DHCP_OPTION(    14,	    MERIT_DUMP_FILE,									"Client to dump and name the file to dump it to",						-1	)
+// Domain name the client should use when resolving hostnames via the DNS
+DHCP_OPTION(    15,	    DOMAIN_NAME,										"The DNS domain name of the client",									-1	)
+// IP Address of the clients swap server (server providing swap storage to a diskless workstation over the network)
+DHCP_OPTION(    16,	    SWAP_SERVER,										"Swap Server address",													-1	)
+// Path name to the clients root list
+DHCP_OPTION(    17,	    ROOT_PATH,											"Path name for root disk",												-1	)
+// BootP extensions file available via Tftp
+DHCP_OPTION(    18,	    EXTENSIONS_FILE,									"Path name for more BOOTP info",										-1	)
+/**
+ * IP Layer Per-Host Parameters
+ */
+// Tells client to configure its IP layer for packet forwarding
+DHCP_OPTION(    19,	    IP_FORWARDING_ENABLE_DISABLE,						"Enable/Disable IP Forwarding",											1	)
+// Tells the client to configure its IP layer to allow forwarding of datagrams with non local source routes
+DHCP_OPTION(    20,	    NON_LOCAL_SOURCE_ROUTING_ENABLE_DISABLE,			"Enable/Disable Source Routing",										1	)
+// Specifies policy filters for non local source routing (if next hop does not match the policy, discard)
+DHCP_OPTION(    21,	    POLICY_FILTER,										"Routing Policy Filters",												-1	)
+// Specifies max size datagram the client should be prepared to reassemble
+DHCP_OPTION(    22,	    MAXIMUM_DATAGRAM_REASSEMBLY_SIZE,					"Max Datagram Reassembly Size",											2	)
+// Default ttl for outgoing packets
+DHCP_OPTION(    23,	    DEFAULT_IP_TIME_TO_LIVE,							"Default IP Time to Live",												1	)
+// Timeout used while ageing MTUs
+DHCP_OPTION(    24,	    PATH_MTU_AGING_TIMEOUT,								"Path MTU Aging Timeout			",										4	)
+// Table of MTU sizes when performing path MTU discovery (see RFC 1191)
+DHCP_OPTION(    25,	    PATH_MTU_PLATEAU_TABLE,								"Path MTU Plateau Table",												-1	)
+/**
+ * IP Layer Per-Interface Parameters
+ */
+// MTU to use on interface
+DHCP_OPTION(    26,	    INTERFACE_MTU,										"Interface MTU Size",													2	)
+// Whether the client can assume all subnets use the same MTU as the subnet the client is directly connected to
+DHCP_OPTION(    27,	    ALL_SUBNETS_ARE_LOCAL,								"All Subnets are Local",												1	)
+// Client broadcast address
+DHCP_OPTION(    28,	    BROADCAST_ADDRESS,									"Broadcast Address",													4	)
+// Whether or not the client should perform a subnet mask discovery via ICMP
+DHCP_OPTION(    29,	    PERFORM_MASK_DISCOVERY,								"Perform Mask Discovery",												1	)
+// Whether the client should respond to subnet mask requests via ICMP
+DHCP_OPTION(    30,	    MASK_SUPPLIER,										"Provide Mask to Others",												1	)
+// Whether the client should solicit routers using Router discovery mechanisms (see RFC 1256)
+DHCP_OPTION(    32,	    PERFORM_ROUTER_DISCOVERY,							"Perform Router Discovery",												1	)
+// Whether the client should transmit Router Solicitation Requests
+DHCP_OPTION(    32,	    ROUTER_SOLICITATION_ADDRESS,						"Router Solicitation Address",											4	)
+// List of static routes the client should install on its routing cache
+DHCP_OPTION(    33,	    STATIC_ROUTE,										"Static Routing Table",													-1	)
+/**
+ * Link Layer Per-Interface Parameters
+ */
+// Whether or not the client should negotiate the use of trailers (RFC 893) when using the ARP protocol
+DHCP_OPTION(    34,	    TRAILER_ENCAPSULATION,								"Trailer Encapsulation",												1	)
+// The timeout in seconds for ARP cache entries. The time is specified as a 32-bit unsigned integer
+DHCP_OPTION(    35,	    ARP_CACHE_TIMEOUT,									"ARP Cache Timeout",													4	)
+// Whether or not the client should use Ethernet Version 2 (RFC 894) or IEEE 802.3 (RFC 1042) encapsulation if the interface is an Ethernet.
+DHCP_OPTION(    36,	    ETHERNET_ENCAPSULATION,								"Ethernet Encapsulation",												1	)
+/**
+ * TCP Parameters
+ */
+// The default TTL that the client should use when sending TCP segments
+DHCP_OPTION(    37,	    TCP_DEFAULT_TTL,									"Default TCP Time to Live",												1	)
+// This option specifies the interval (in seconds) that the client TCP should wait before sending a keepalive message on a TCP connection. The time is specified as a 32-bit unsigned integer.
+DHCP_OPTION(    38,	    TCP_KEEPALIVE_INTERVAL,								"TCP Keepalive Interval",												4	)
+// Whether or not the client should send TCP keepalive messages with a octet of garbage for compatibility with older implementations.
+DHCP_OPTION(    39,	    TCP_KEEPALIVE_GARBAGE,								"TCP Keepalive Garbage",												1	)
+/**
+ * Application and Service Parameters
+ */
+// A list of NTP servers available to the client in order of preference.
+DHCP_OPTION(    42,	    NTP_SERVER,                 						"NTP Server Addresses",          										-1	)
+// A list of SMTP servers available to the client in order of preference.
+DHCP_OPTION(    69,	    SIMPLE_MAIL_TRANSPORT_PROTOCOL,						"Simple Mail Server Addresses", 										-1	)
+// A list of POP3 servers available to the client in order of preference.
+DHCP_OPTION(    70,	    POST_OFFICE_PROTOCOL_SERVER,						"Post Office Server Addresses",											-1	)
+// A list of WWW servers available to the client in order of preference.
+DHCP_OPTION(    72,	    DEFAULT_WORLD_WIDE_WEB_SERVER,						"WWW Server Addresses", 										        -1	)
+// A list of Finger servers available to the client in order of preference.
+DHCP_OPTION(    73,	    DEFAULT_FINGER_SERVER,								"Finger Server Addresses",												-1	)
+// A list of IRC servers available to the client in order of preference.
+DHCP_OPTION(    74,	    DEFAULT_INTERNET_RELAY_CHAT_SERVER,					"Chat Server Addresses",            									-1	)
+
+DHCP_OPTION(    82,	    RELAY_AGENT_INFORMATION,							"Relay Agent Information",												-1	)
+/**
+ * DHCP Extensions
+ */
+// Client request (DHCP DISCOVER) specific requested IP address parameter
+DHCP_OPTION(    50,	    REQUESTED_IP_ADDRESS,								"Requested IP Address",													4	)
+// Lease time for an IP address used in client requests (DHCP DISCOVER and DHCP REQUEST) and also in server replies for specifying lease time (DHCP OFFER)
+DHCP_OPTION(    51,	    IP_ADDRESS_LEASE_TIME,								"IP Address Lease Time",												4	)
+// Indicates DHCP 'sname' or 'file' fields are being overloaded to carry DHCP options
+DHCP_OPTION(    52,	    OVERLOAD,											"Overload `sname` or `file`",											1	)
+// Used to indicate the TFTP server name when SNAME has been overloaded
+DHCP_OPTION(    66,	    TFTP_SERVER_NAME,									"TFTP Server Name",														-1	)
+// Used to identify a bootfile when FILE field in the DHCP headers has been overloaded
+DHCP_OPTION(    67,	    BOOTFILE_NAME,										"BOOTFILE_NAME",														-1	)
+// DHCP Message type, values in the followingf table
+// | Value | Message Type |
+// |------:|:------------:|
+// |     0 | DHCPDISCOVER |
+// |     1 | DHCPOFFER    |
+// |     2 | DHCPREQUEST  |
+// |     3 | DHCPDECLINE  |
+// |     4 | DHCPACK      |
+// |     5 | DHCPNAK      |
+// |     6 | DHCPRELEASE  |
+// |     7 | DHCPINFORM   |
+DHCP_OPTION(    53,	    DHCP_MESSAGE_TYPE,									"DHCP_MESSAGE_TYPE",													1	)
+// Used in DHCPOFFER and DHCPREQUEST (AND OPTIONALLY MAY BE INCLUDED IN DHCPACK and DHCPNACK) added by the server to distinguish lease offers. It is set to the IP of the selected server.
+DHCP_OPTION(    54,	    SERVER_IDENTIFIER,									"SERVER_IDENTIFIER",													4	)
+// Used by the client to request for specific configuration parameters
+DHCP_OPTION(    55,	    PARAMETER_REQUEST_LIST,								"PARAMETER_REQUEST_LIST",												-1	)
+// Used by servers to indicate errors in DHCPNACK or by clients in DHCPDECLINE to indicate the reason for declining the configuration
+DHCP_OPTION(    56,	    MESSAGE,											"MESSAGE",															    -1	)
+// Indicates the max length DHCP message the client is willing to accept in DHCPDISCOVER and DHCPREQUEST
+DHCP_OPTION(    57,	    MAXIMUM_DHCP_MESSAGE_SIZE,							"MAXIMUM_DHCP_MESSAGE_SIZE",											2	)
+// Time interval from address assignment till the client enters renewal state
+DHCP_OPTION(    58,	    RENEWAL_TIME_VALUE,									"RENEWAL_TIME_VALUE",													4	)
+// Time interval from address assignment till the client enters rebinding state
+DHCP_OPTION(    59,	    REBINDING_TIME_VALUE,								"REBINDING_TIME_VALUE",													4	)
+// Vendor type and configuration of a DHCP Client
+DHCP_OPTION(    60,	    VENDOR_CLASS_IDENTIFIER,							"VENDOR_CLASS_IDENTIFIER",												-1	)
+// Unique identifier specified by the client, treated as opaque objects by the server and must be unique within the subnet
+DHCP_OPTION(    61,	    CLIENT_IDENTIFIER,									"CLIENT_IDENTIFIER",													-1	)
+// DHCP Timezone Options as defined in RFC 4833
+DHCP_OPTION(    100,	TZ_POSIX_STRING,									"TZ_POSIX_STRING",														-1	)
+// The Timezone database identifier
+DHCP_OPTION(    101,	TZ_DATABASE_STRING,									"TZ_DATABASE_STRING",													-1	)
