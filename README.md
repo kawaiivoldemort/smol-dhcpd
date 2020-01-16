@@ -1,3 +1,3 @@
 # SMOL DHCPD
 
-Smol DHPC Daemon implementation
+A small DHCP daemon written in C.
